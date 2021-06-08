@@ -26,7 +26,7 @@ CREATE TABLE `categories` (
   `categoryId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`categoryId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -35,33 +35,35 @@ CREATE TABLE `categories` (
 
 LOCK TABLES `categories` WRITE;
 /*!40000 ALTER TABLE `categories` DISABLE KEYS */;
+INSERT INTO `categories` VALUES (1,'Mobile Phone'),(2,'Smart Phone'),(3,'Foldable Phone');
 /*!40000 ALTER TABLE `categories` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `manifacturers`
+-- Table structure for table `manufacturers`
 --
 
-DROP TABLE IF EXISTS `manifacturers`;
+DROP TABLE IF EXISTS `manufacturers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `manifacturers` (
-  `manifacturerId` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `manufacturers` (
+  `manufacturerId` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `country` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `city` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  `rank` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`manifacturerId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `rang` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  PRIMARY KEY (`manufacturerId`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `manifacturers`
+-- Dumping data for table `manufacturers`
 --
 
-LOCK TABLES `manifacturers` WRITE;
-/*!40000 ALTER TABLE `manifacturers` DISABLE KEYS */;
-/*!40000 ALTER TABLE `manifacturers` ENABLE KEYS */;
+LOCK TABLES `manufacturers` WRITE;
+/*!40000 ALTER TABLE `manufacturers` DISABLE KEYS */;
+INSERT INTO `manufacturers` VALUES (1,'Samsung','South Korea','Seoul','12');
+/*!40000 ALTER TABLE `manufacturers` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -73,17 +75,17 @@ DROP TABLE IF EXISTS `products`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `products` (
   `productId` int(11) NOT NULL AUTO_INCREMENT,
-  `manifacturerId` int(11) NOT NULL,
+  `manufacturer` int(11) NOT NULL,
   `category` int(11) NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `releaseDate` datetime NOT NULL,
   `price` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`productId`),
-  KEY `manifacturerId_idx` (`manifacturerId`),
-  KEY `category_idx` (`category`),
+  KEY `category` (`category`),
+  KEY `manufacturers` (`manufacturer`),
   CONSTRAINT `category` FOREIGN KEY (`category`) REFERENCES `categories` (`categoryId`) ON DELETE RESTRICT ON UPDATE CASCADE,
-  CONSTRAINT `manifacturerId` FOREIGN KEY (`manifacturerId`) REFERENCES `manifacturers` (`manifacturerId`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  CONSTRAINT `manifacturer` FOREIGN KEY (`manufacturer`) REFERENCES `manufacturers` (`manufacturerId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -92,6 +94,7 @@ CREATE TABLE `products` (
 
 LOCK TABLES `products` WRITE;
 /*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,1,3,'Samsung galaxy s21','2021-06-25 00:00:00','200');
 /*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -108,4 +111,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-08 22:53:04
+-- Dump completed on 2021-06-09  1:32:24
