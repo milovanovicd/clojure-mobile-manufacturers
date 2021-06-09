@@ -9,6 +9,11 @@ body {
     background-color: #fff;
 }
 
+.form-container {
+    margin: 0 auto;
+    max-width: 450px;
+}
+
 .navbar {
     width: 250px;
     height: 100vh;
