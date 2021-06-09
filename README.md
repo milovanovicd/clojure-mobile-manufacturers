@@ -1,10 +1,15 @@
 # clojure-mobile-manufacturers
 
-A Clojure library designed to ... well, that part is up to you.
+Simple Clojure CRUD application created for faculty purposes. 
 
 ## Usage
 
-FIXME
+Run sql script clojure_crud.sql to create a database, change username and password and then run:
+
+```console
+lein ring server
+```
+
 
 ## License
 
